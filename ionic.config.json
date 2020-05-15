@@ -1,0 +1,7 @@
+{
+  "name": "x95_qr",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
