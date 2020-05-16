@@ -1,20 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
-    </ion-title>
+      CSx95 Attendance App
+      </ ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label>Course</ion-label>
+      <ion-select placeholder="Select course" (ionChange)="setCourse($event)">
+        <ion-select-option *ngFor="let course of courses" [value]="course">
+          {{course}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-button [disabled]="isScanBtnDisabled" (click)="scanCode()">Scan</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-text>For debugging: {{ scannedCode }} </ion-text>
+    </ion-item>
+  </ion-list>
 </ion-content>

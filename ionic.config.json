@@ -1,7 +1,8 @@
 {
   "name": "x95_qr",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
