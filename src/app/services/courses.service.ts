@@ -3,6 +3,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
+interface FirebaseCourseRecord {
+  adminEmail: string;
+  password: string;
+  name: string;
+  notes: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -17,24 +23,15 @@ export class CoursesService {
 
   constructor(
     private db: AngularFirestore,
-  ) { }
-
-  loadAllData() {
-    if (this.courses.length !== 0) {
-      return;
-    }
-
-    this.courses = [];
-    this.courseCollection = this.db.collection<string>('courses');
-
-    this.courseCollection.get().subscribe(q => {
-      q.forEach(d => {
-        console.log('d = ', d.data().name);
-        this.courses.push(d.data().name);
+  ) { 
+    this.db.collection<FirebaseCourseRecord>('/courses').snapshotChanges().subscribe(docChActions => {
+      this.courses = [];
+      docChActions.forEach(dca => {
+        const course = dca.payload.doc.data();
+        this.courses.push(course.name);
       });
       // Tell all subscribers that the data has arrived.
       this.coursesSubj.next(this.courses);
     });
   }
-
 }

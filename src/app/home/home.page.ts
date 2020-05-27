@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { CoursesService } from '../service/courses.service';
+import { CoursesService } from '../services/courses.service';
+import { SubmissionService } from '../services/submission.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,16 @@ import { CoursesService } from '../service/courses.service';
 })
 export class HomePage {
 
-  public scannedCode = 'Nothing yet';
+  public scannedCode = null;
   public course = '';     // the course for which attendance is being recorded.
   public isScanBtnDisabled = true;
   public courses: string[] = [];
+  public notes = '';
 
   constructor(
     private barcodeScanner: BarcodeScanner,
     private cSvc: CoursesService,
+    private sSvc: SubmissionService,
   ) {
     // Get the list of courses from the service, once it has gotten them
     // from the database.
@@ -34,8 +37,13 @@ export class HomePage {
 
   setCourse(event) {
     this.course = event.detail.value;
-    console.log(event.detail.value);
     this.isScanBtnDisabled = false;
+  }
+
+  // Submit name info, course, qr info, and notes to firebase.
+  submit() {
+    this.sSvc.submit(this.course, this.scannedCode, this.notes);
+    this.scannedCode = null;
   }
 
 }

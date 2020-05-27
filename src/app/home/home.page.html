@@ -23,5 +23,20 @@
     <ion-item>
       <ion-text>For debugging: {{ scannedCode }} </ion-text>
     </ion-item>
+    <div *ngIf="scannedCode">
+      <ion-item>
+        Got the secret code.
+      </ion-item>
+      <ion-item>
+        <ion-label>Enter notes:</ion-label>
+        <ion-textarea [(ngModel)]="notes">
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="submit()">
+          Submit
+        </ion-button>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
