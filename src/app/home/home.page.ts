@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { CoursesService } from '../services/courses.service';
 import { SubmissionService } from '../services/submission.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -16,16 +17,26 @@ export class HomePage {
   public courses: string[] = [];
   public notes = '';
 
+  public firstName = '';
+  public lastName = '';
+  public userId = '';
+
   constructor(
     private barcodeScanner: BarcodeScanner,
     private cSvc: CoursesService,
     private sSvc: SubmissionService,
+    private storage: Storage,
   ) {
     // Get the list of courses from the service, once it has gotten them
     // from the database.
     this.cSvc.coursesSubj.subscribe(data => {
       this.courses = data;
     });
+
+    this.storage.get('firstName').then(f => this.firstName = f);
+    this.storage.get('lastName').then(l => this.lastName = l);
+    this.storage.get('userId').then(u => this.userId = u);
+
   }
 
   async scanCode() {
@@ -42,7 +53,7 @@ export class HomePage {
 
   // Submit name info, course, qr info, and notes to firebase.
   submit() {
-    this.sSvc.submit(this.course, this.scannedCode, this.notes);
+    this.sSvc.submit(this.firstName, this.lastName, this.userId, this.course, this.scannedCode, this.notes);
     this.scannedCode = null;
   }
 

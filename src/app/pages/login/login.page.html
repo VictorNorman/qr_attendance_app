@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>First-time Registration: Welcome!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-text>This information cannot be changed after submitting.</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>UserId</ion-label>
+      <ion-input placeholder="jc2" type="text" [(ngModel)]="userId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-input type="text" [(ngModel)]="firstName" placeholder="Johanna"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name</ion-label>
+      <ion-input type="text" [(ngModel)]="lastName" placeholder="Calvin-Nivlac"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button [disabled]="disableSubmitBtn()" (click)="submit()">Submit</ion-button>
+
+</ion-content>

@@ -1,14 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      CSx95 Attendance App
-      </ ion-title>
+      QR Code Attendance App
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
   <ion-list>
+    <ion-item>
+      Hi, {{firstName}}. How are you? Good to see you.
+    </ion-item>
     <ion-item>
       <ion-label>Course</ion-label>
       <ion-select placeholder="Select course" (ionChange)="setCourse($event)">

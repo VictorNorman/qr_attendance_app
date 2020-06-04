@@ -17,7 +17,6 @@ interface FirebaseMeetingRecord {
   submissionsId: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -42,8 +41,9 @@ export class SubmissionService {
       : timestamp;
   }
 
-  submit(courseName: string, codeStr: string, notes: string) {
-     const meetingsDoc = this.db.collection('/meetings').doc<FirebaseMeetingRecord>(courseName);
+  submit(firstName: string, lastName: string, userId: string, courseName: string, 
+    codeStr: string, notes: string) {
+    const meetingsDoc = this.db.collection('/meetings').doc<FirebaseMeetingRecord>(courseName);
 
     meetingsDoc.get().subscribe(data => {
       const mtgs: FirebaseMeetingRecord[] = data.data()['mtgs'];
@@ -56,9 +56,9 @@ export class SubmissionService {
       }
       this.db.doc(meeting.submissionsId).update({
         submissions: firestore.FieldValue.arrayUnion({
-          firstName: 'Vic',
-          lastName: 'Norma',
-          userId: 'abc',
+          firstName,
+          lastName,
+          userId,
           notes,
         })
       });
