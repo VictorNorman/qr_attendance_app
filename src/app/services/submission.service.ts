@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase/app';
 import * as firebase from 'firebase';
 import Timestamp = firebase.firestore.Timestamp;
+import { ToastController } from '@ionic/angular';
 
 // interface FirebaseMeetingSubmissionRecord {
 //   firstName: string;
@@ -24,6 +25,7 @@ export class SubmissionService {
 
   constructor(
     private db: AngularFirestore,
+    private toastCtrl: ToastController,
   ) { }
 
   // NOTE: when trying to submit, must check if the QR code is correct.  Also 
@@ -41,27 +43,33 @@ export class SubmissionService {
       : timestamp;
   }
 
-  submit(firstName: string, lastName: string, userId: string, courseName: string, 
+  submit(firstName: string, lastName: string, userId: string, courseName: string,
     codeStr: string, notes: string) {
     const meetingsDoc = this.db.collection('/meetings').doc<FirebaseMeetingRecord>(courseName);
+    let message = '';
 
-    meetingsDoc.get().subscribe(data => {
+    meetingsDoc.get().subscribe(async data => {
       const mtgs: FirebaseMeetingRecord[] = data.data()['mtgs'];
       const meeting = mtgs.find(m => m.qrCodeStr === codeStr);
       if (!meeting) {
-
-        // TODO: add alert controller pop up here.
-        console.log("ERRORROROROR");
-        return;
+        message = 'Submission failed: you probably submitted to the incorrect course.'
+      } else {
+        await this.db.doc(meeting.submissionsId).update({
+          submissions: firestore.FieldValue.arrayUnion({
+            firstName,
+            lastName,
+            userId,
+            notes,
+          })
+        });
+        message = 'Submission succeeded!';
       }
-      this.db.doc(meeting.submissionsId).update({
-        submissions: firestore.FieldValue.arrayUnion({
-          firstName,
-          lastName,
-          userId,
-          notes,
-        })
+      const t = await this.toastCtrl.create({
+        message,
+        position: 'middle',
+        duration: 1000,
       });
+      t.present();
     });
   }
 }
