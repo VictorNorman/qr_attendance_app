@@ -21,14 +21,13 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-button [disabled]="isScanBtnDisabled" (click)="scanCode()">Scan</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-text>For debugging: {{ scannedCode }} </ion-text>
+      <ion-button class="scan-code-button" expand="block" [disabled]="isScanBtnDisabled" (click)="scanCode()">
+        Scan Projected QR Code
+      </ion-button>
     </ion-item>
     <div *ngIf="scannedCode">
       <ion-item>
-        Got the secret code.
+        Got the secret code for this meeting.
       </ion-item>
       <ion-item>
         <ion-label>Enter notes:</ion-label>
@@ -41,8 +40,8 @@
         </ion-button>
       </ion-item>
     </div>
-    <ion-item>
-      <ion-note>{{version}}</ion-note>
-    </ion-item>
   </ion-list>
+  <ion-note class="near-bottom">Copyright 2020, Victor Norman, <br />
+    Calvin University, Version <span class="secret" (click)="clearRegistrationInfo()">{{version}}</span>
+  </ion-note>
 </ion-content>

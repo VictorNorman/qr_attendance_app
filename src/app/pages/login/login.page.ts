@@ -19,8 +19,6 @@ export class LoginPage {
   ) { }
 
   submit() {
-    console.log('got it');
-
     this.storage.set('userId', this.userId);
     this.storage.set('firstName', this.firstName);
     this.storage.set('lastName', this.lastName);

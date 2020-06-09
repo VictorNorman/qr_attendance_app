@@ -21,7 +21,7 @@ export class HomePage {
   public lastName = '';
   public userId = '';
 
-  public version = '0.1';
+  public version = '0.8.1';
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -57,6 +57,12 @@ export class HomePage {
   submit() {
     this.sSvc.submit(this.firstName, this.lastName, this.userId, this.course, this.scannedCode, this.notes);
     this.scannedCode = null;
+  }
+
+  clearRegistrationInfo() {
+    this.storage.remove('userId');
+    this.storage.remove('firstName');
+    this.storage.remove('lastName');
   }
 
 }

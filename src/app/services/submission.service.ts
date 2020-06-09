@@ -62,14 +62,32 @@ export class SubmissionService {
             notes,
           })
         });
-        message = 'Submission succeeded!';
+        const numSubmissions = await this.getNumSubmissionsForUser(userId);
+        message = `Submission succeeded! You have ${numSubmissions} attendances recorded now via the app.`;
       }
       const t = await this.toastCtrl.create({
         message,
         position: 'middle',
-        duration: 1000,
+        duration: 3000,
       });
       t.present();
+    });
+  }
+
+  getNumSubmissionsForUser(userId: string): Promise<number> {
+    return new Promise(resolve => {
+      let numFound = 0;
+      this.db.collection('/submissions').get().subscribe(data => {
+        data.docs.forEach(d => {
+          const subs = d.data().submissions as any[];
+          subs.forEach(s => {
+            if (s.userId === userId) {
+              numFound++;
+            }
+          });
+        });
+        return resolve(numFound);
+      });
     });
   }
 }
