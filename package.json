@@ -32,6 +32,7 @@
     "@ionic/pwa-elements": "^1.5.2",
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.1.0",
+    "cordova-ios": "5.1.1",
     "cordova-res": "^0.14.0",
     "cordova-sqlite-storage": "^5.0.0",
     "firebase": "^7.14.4",
@@ -85,7 +86,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
