@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "x95_qr",
+  "appId": "edu.calvin.computing.qrca",
+  "appName": "qrca",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="edu.calvin.computing" version="0.8.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="edu.calvin.computing" version="0.8.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>QRCA</name>
-    <description>An app to handle registration of attendees at an meeting</description>
-    <author email="vtn2@calvin.edu" href="http://ionicframework.com/">Victor Norman</author>
+    <description>An app to handle registration of attendees at a meeting</description>
+    <author email="vtn2@calvin.edu" href="https://computing.calvin.edu">Victor Norman</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

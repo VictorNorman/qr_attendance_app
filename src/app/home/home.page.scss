@@ -12,5 +12,11 @@
 }
 
 ion-img {
-  height: 30px;
+  max-width: 8vw;
 }
+
+ion-toolbar {
+  --background: beige;
+  --padding-start: 3vw;
+}
+

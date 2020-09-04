@@ -21,7 +21,7 @@ export class HomePage {
   public lastName = '';
   public userId = '';
 
-  public version = '0.8.1';
+  public version = '0.8.3';
 
   constructor(
     private barcodeScanner: BarcodeScanner,
